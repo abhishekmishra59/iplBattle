@@ -1,0 +1,6 @@
+com\ipl\iplbattle\ServletInitializer.class
+com\ipl\iplbattle\IplbattleApplication.class
+com\ipl\iplbattle\controller\IplBattleApi.class
+com\ipl\iplbattle\dao\IplBattleDao.class
+com\ipl\iplbattle\controller\IplBattleController.class
+com\ipl\iplbattle\service\IplBattleService.class

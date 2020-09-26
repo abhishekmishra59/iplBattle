@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="30 seconds">
+<appender name="ANALYTICS-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/app/log/Analytics/analytics_IPLService.log</file>
+        <append>true</append>
+   <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+        <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+        <prettyPrint>false</prettyPrint>
+        </jsonFormatter>
+        <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+        <includeMDC>false</includeMDC>
+        <includeContextName>false</includeContextName>
+        <appendLineSeparator>true</appendLineSeparator>
+   </layout>
+</appender>
+<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p %logger{35} - %msg %n</Pattern>
+        </encoder>
+    </appender>
+<appender name="TIME_BASED_FILE"
+     class="ch.qos.logback.core.rolling.RollingFileAppender">
+     <file>/app/log/tag/IPLService.log</file>
+     <rollingPolicy
+           class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+           <!-- daily rollover -->
+           <fileNamePattern>/app/log/tag/IPLService.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+           <maxHistory>30</maxHistory>
+           
+     </rollingPolicy>
+     <encoder>
+         <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p %logger{35} - %msg %n</pattern>
+     </encoder>
+</appender>
+<logger name="analytics" level="INFO" additivity="false">
+     <appender-ref ref="ANALYTICS-FILE" />
+</logger>
+<root level="INFO">
+<appender-ref ref="consoleAppender" />
+      <appender-ref ref="TIME_BASED_FILE" />
+</root>
+</configuration>
+
